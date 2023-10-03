@@ -30,13 +30,13 @@ void display()
     glutSwapBuffers();
 }
 
-void keyboard(unsigned char key, int x, int y)
+void special(int key, int x, int y)
 {
     switch (key) {
-    case 'k':
+    case GLUT_KEY_LEFT:
         player.incTheta(0.1);
         break;
-    case 'l':
+    case GLUT_KEY_RIGHT:
         player.incTheta(-0.1);
         break;
     }
@@ -92,7 +92,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(WIDTH, HEIGHT);
     glutCreateWindow("Snake3D");
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
+    glutSpecialFunc(special);
     glutTimerFunc(50, gameLoop, 0);
 
     init();
