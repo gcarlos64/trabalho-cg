@@ -3,6 +3,12 @@
 
 #include "Stage.h"
 
+#define VIEW_MAX 1000
+#define VIEW_MIN 0.1
+#define VIEW_ANGLE 45
+#define VIEW_RANGE 400
+#define PLAYER_SIZE 10.0
+
 class Player {
     public:
         Player();
@@ -11,10 +17,12 @@ class Player {
         void move();
         void commitCamera();
         void draw();
+        void eat();
         bool colides();
 
     private:
-        double x, y, z, theta, speed;
+        unsigned int score;
+        double x, z, theta, speed;
 };
 
 #endif

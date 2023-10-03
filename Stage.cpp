@@ -1,4 +1,4 @@
-rinclude <vector>
+#include <vector>
 #include <GL/glut.h>
 #include "Stage.h"
 #include "Point.h"

@@ -4,11 +4,13 @@
 #include "Point.h"
 #include "Stage.h"
 #include "Player.h"
+#include "Food.h"
 
 #define WIDTH 800
 #define HEIGHT 600
 
 extern Player player;
 extern Stage stage;
+extern Food food;
 
 #endif

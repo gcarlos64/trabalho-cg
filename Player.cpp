@@ -1,22 +1,17 @@
 #include <GL/glut.h>
 #include <math.h>
+#include <cmath>
 #include "Player.h"
 #include "Range.h"
 #include "global.h"
 
-#define VIEW_MAX 1000
-#define VIEW_MIN 0.1
-#define VIEW_ANGLE 45
-#define VIEW_RANGE 400
-#define PLAYER_SIZE 10.0
-
 Player::Player()
 {
     x = PLAYER_SIZE;
-    y = PLAYER_SIZE / 2;
     z = -PLAYER_SIZE;
     theta = 0;
     speed = 2.0;
+    score = 0;
     commitCamera();
 }
 
@@ -36,6 +31,7 @@ void Player::move()
     z += speed * -sin(theta);
     if (colides())
         exit(0);
+    eat();
 }
 
 void Player::commitCamera()
@@ -54,7 +50,7 @@ void Player::commitCamera()
 void Player::draw()
 {
     glPushMatrix();
-        glTranslatef(x, y, z);
+        glTranslatef(x, PLAYER_SIZE / 2 , z);
         glutSolidSphere(PLAYER_SIZE, 20, 20);
     glPopMatrix();
 }
@@ -70,4 +66,14 @@ bool Player::colides()
             return true;
 
     return false;
+}
+
+void Player::eat()
+{
+    const double distance = 3 * PLAYER_SIZE / 2;
+    if(std::fabs(x - food.x) < distance &&
+       std::fabs(z - food.z) < distance) {
+         score++;
+         food.gen();
+     }
 }

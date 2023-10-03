@@ -3,10 +3,12 @@
 
 #include "Player.h"
 #include "Range.h"
+#include "Food.h"
 #include "global.h"
 
 Player player;
 Stage stage = Stage(0.0, 600.0, -300.0, 300.0);
+Food food = Food();
 
 void display()
 {
@@ -18,6 +20,9 @@ void display()
 
     glColor3f(0.0, 0.2, 1.0);
     player.draw();
+
+    glColor3f(1.0, 0.7, 0.0);
+    food.draw();
 
     glColor3f(1.0, 0.2, 0.0);
     glPushMatrix();
