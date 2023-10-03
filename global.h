@@ -1,10 +1,9 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-#include "Point.h"
-#include "Stage.h"
-#include "Player.h"
 #include "Food.h"
+#include "Player.h"
+#include "Stage.h"
 
 #define WIDTH 800
 #define HEIGHT 600

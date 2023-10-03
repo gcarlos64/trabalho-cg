@@ -1,12 +1,14 @@
 #ifndef FOOD_H
 #define FOOD_H
 
+#include "Point.h"
+
 class Food {
     public:
         Food();
         void draw();
         void gen();
-        double x, z;
+        Point pos;
 };
 
 #endif 

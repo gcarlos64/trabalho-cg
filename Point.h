@@ -3,9 +3,10 @@
 
 class Point {
     public:
-        Point(double x, double y, double z);
+        Point();
+        Point(double x, double z);
+        double distance(const Point &p);
         double x;
-        double y;
         double z;
 };
 

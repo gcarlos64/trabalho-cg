@@ -1,14 +1,12 @@
+#include <cmath>
 #include <GL/glut.h>
-#include <math.h>
-
-#include "Player.h"
-#include "Range.h"
 #include "Food.h"
 #include "global.h"
+#include "Player.h"
 
 Player player;
-Stage stage = Stage(0.0, 600.0, -300.0, 300.0);
-Food food = Food();
+Stage stage(500.0, 100);
+Food food;
 
 void display()
 {

@@ -3,14 +3,18 @@
 
 #include <vector>
 #include "Point.h"
-#include "Player.h"
-#include "Range.h"
 
 class Stage {
     public:
-        Stage(double xbegin, double xend, double zbegin, double zend);
+        Stage(double radius, unsigned int slice);
         void draw();
-        Range xrange, zrange;
+        bool isIn(Point &p);
+        double radius;
+
+    private:
+        unsigned int slices;
+        Point center;
+        std::vector<Point> border;
 };
 
 #endif

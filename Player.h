@@ -1,9 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "Stage.h"
+#include "Point.h"
 
-#define VIEW_MAX 1000
+#define VIEW_MAX 1500
 #define VIEW_MIN 0.1
 #define VIEW_ANGLE 45
 #define VIEW_RANGE 400
@@ -18,11 +18,11 @@ class Player {
         void commitCamera();
         void draw();
         void eat();
-        bool colides();
 
     private:
         unsigned int score;
-        double x, z, theta, speed;
+        double theta, speed;
+        Point pos;
 };
 
 #endif

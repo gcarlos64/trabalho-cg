@@ -1,18 +1,15 @@
 #include <GL/glut.h>
-#include <math.h>
 #include <cmath>
-#include "Player.h"
-#include "Range.h"
 #include "global.h"
+#include "Player.h"
+#include "Point.h"
 
-Player::Player()
+Player::Player():
+pos(PLAYER_SIZE, -PLAYER_SIZE)
 {
-    x = PLAYER_SIZE;
-    z = -PLAYER_SIZE;
     theta = 0;
     speed = 2.0;
     score = 0;
-    commitCamera();
 }
 
 void Player::setTheta(double theta)
@@ -27,53 +24,45 @@ void Player::incTheta(double dtheta)
 
 void Player::move()
 {
-    x += speed * cos(theta);
-    z += speed * -sin(theta);
-    if (colides())
+    pos.x += speed * cos(theta);
+    pos.z += speed * -sin(theta);
+    if (stage.isIn(pos))
         exit(0);
     eat();
 }
 
 void Player::commitCamera()
 {
+    Point cameraTarget(pos.x + VIEW_RANGE * cos(theta),
+                       pos.z - VIEW_RANGE * sin(theta));
+    Point cameraPos(pos.x - VIEW_RANGE * cos(theta),
+                    pos.z + VIEW_RANGE * sin(theta));
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(VIEW_ANGLE, WIDTH/HEIGHT, VIEW_MIN, VIEW_MAX);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(x + VIEW_RANGE * -cos(theta), VIEW_RANGE / 2, z + VIEW_RANGE * sin(theta),
-              x + VIEW_RANGE * cos(theta), 0, z + VIEW_RANGE * -sin(theta),
+
+    gluLookAt(cameraPos.x, VIEW_RANGE / 2, cameraPos.z,
+              cameraTarget.x, 0, cameraTarget.z,
               0, 1, 0);
 }
 
 void Player::draw()
 {
     glPushMatrix();
-        glTranslatef(x, PLAYER_SIZE / 2 , z);
+        glTranslatef(pos.x, PLAYER_SIZE / 2 , pos.z);
         glutSolidSphere(PLAYER_SIZE, 20, 20);
     glPopMatrix();
 }
 
-bool Player::colides()
-{
-    auto xrange = stage.xrange;
-    auto zrange = stage.zrange;
-    if (x - PLAYER_SIZE < xrange.begin ||
-        x + PLAYER_SIZE > xrange.end   ||
-        z + PLAYER_SIZE > zrange.end   ||
-        z - PLAYER_SIZE < zrange.begin)
-            return true;
-
-    return false;
-}
-
 void Player::eat()
 {
-    const double distance = 3 * PLAYER_SIZE / 2;
-    if(std::fabs(x - food.x) < distance &&
-       std::fabs(z - food.z) < distance) {
+    if (pos.distance(food.pos) < 3 * PLAYER_SIZE / 2) {
          score++;
+         speed += 0.1;
          food.gen();
      }
 }
