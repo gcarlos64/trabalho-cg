@@ -5,8 +5,7 @@
 #include "Player.h"
 #include "Point.h"
 
-Player::Player():
-pos(PLAYER_SIZE, -PLAYER_SIZE)
+Player::Player()
 {
     theta = 0;
     speed = 2.0;

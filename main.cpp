@@ -24,10 +24,6 @@ void display()
     food.draw();
 
     glColor3f(1.0, 0.2, 0.0);
-    glPushMatrix();
-        glTranslated(100, 0, -100);
-        glutWireTeapot(50.0);
-    glPopMatrix();
 
     player.printScore();
 
@@ -50,7 +46,7 @@ void keyboard(unsigned char key, int x, int y)
 
 void init()
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.2, 0.0, 0.0);
 
     GLfloat ambientLight[4]  = { 0.2, 0.2, 0.2, 0.0 };
     GLfloat difuseLight[4]   = { 1.0, 1.0, 1.0, 0.0 };

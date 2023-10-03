@@ -14,7 +14,8 @@ class Stage {
     private:
         unsigned int slices;
         Point center;
-        std::vector<Point> border;
+        Point controlPoints[4];
+        std::vector<Point> border, division;
 };
 
 #endif
