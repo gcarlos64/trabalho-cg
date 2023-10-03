@@ -1,4 +1,4 @@
-#include <vector>
+rinclude <vector>
 #include <GL/glut.h>
 #include "Stage.h"
 #include "Point.h"
@@ -6,26 +6,35 @@
 
 #define BORDER_HEIGHT 5.0
 
-Stage::Stage(std::vector<Point> points)
-{
-    this->points = points;
-}
+Stage::Stage(double xbegin, double xend, double zbegin, double zend):
+xrange(xbegin, xend), zrange(zbegin, zend) {}
 
 void Stage::draw(){
-    for (int i = 0; i < points.size(); i++) {
-        Point p = points[i % points.size()];
-        Point np = points[(i + 1) % points.size()];
+    glBegin(GL_QUADS);
+        glVertex3f(xrange.begin, 0, zrange.begin);
+        glVertex3f(xrange.begin, BORDER_HEIGHT, zrange.begin);
+        glVertex3f(xrange.end, BORDER_HEIGHT, zrange.begin);
+        glVertex3f(xrange.end, 0, zrange.begin);
+    glEnd();
 
-        glBegin(GL_QUADS);
-            glVertex3f(p.x, 0, p.z);
-            glVertex3f(p.x, BORDER_HEIGHT, p.z);
-            glVertex3f(np.x, BORDER_HEIGHT, np.z);
-            glVertex3f(np.x, 0, np.z);
-        glEnd();
-    }
-}
+    glBegin(GL_QUADS);
+        glVertex3f(xrange.begin, 0, zrange.end);
+        glVertex3f(xrange.begin, BORDER_HEIGHT, zrange.end);
+        glVertex3f(xrange.end, BORDER_HEIGHT, zrange.end);
+        glVertex3f(xrange.end, 0, zrange.end);
+    glEnd();
 
-std::vector<Point> Stage::getPoints()
-{
-    return points;
+    glBegin(GL_QUADS);
+        glVertex3f(xrange.begin, 0, zrange.begin);
+        glVertex3f(xrange.begin, BORDER_HEIGHT, zrange.begin);
+        glVertex3f(xrange.begin, BORDER_HEIGHT, zrange.end);
+        glVertex3f(xrange.begin, 0, zrange.end);
+    glEnd();
+
+    glBegin(GL_QUADS);
+        glVertex3f(xrange.end, 0, zrange.end);
+        glVertex3f(xrange.end, BORDER_HEIGHT, zrange.end);
+        glVertex3f(xrange.end, BORDER_HEIGHT, zrange.begin);
+        glVertex3f(xrange.end, 0, zrange.begin);
+    glEnd();
 }

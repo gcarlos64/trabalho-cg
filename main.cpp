@@ -2,15 +2,11 @@
 #include <math.h>
 
 #include "Player.h"
+#include "Range.h"
 #include "global.h"
 
 Player player;
-Stage stage = Stage({
-    Point(0.0, 0.0, 300.0),
-    Point(600.0, 0.0, 300.0),
-    Point(600.0, 0.0, -300.0),
-    Point(0.0, 0.0, -300.0),
-});
+Stage stage = Stage(0.0, 600.0, -300.0, 300.0);
 
 void display()
 {
@@ -19,15 +15,7 @@ void display()
 
     glColor3f(0.1, 0.7, 0.2);
     stage.draw();
-    /*
-    glBegin(GL_QUADS);
-        glNormal3f(1.0, 0.0, 0.0);
-        glVertex3f(200.0, 0, 0.0);
-        glVertex3f(200.0, 5.0, 0.0);
-        glVertex3f(200.0, 5.0, -200.0);
-        glVertex3f(200.0, 0.0, -200.0);
-    glEnd();
-    */
+
     glColor3f(0.0, 0.2, 1.0);
     player.draw();
 
@@ -66,7 +54,7 @@ void gameLoop(int val)
 {
     player.move();
     glutPostRedisplay();
-    glutTimerFunc(50, gameLoop, 0);
+    glutTimerFunc(16.6, gameLoop, 0);
 }
 
 int main(int argc, char **argv)

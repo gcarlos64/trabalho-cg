@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "Player.h"
+#include "Range.h"
 #include "global.h"
 
 #define VIEW_MAX 1000
@@ -60,11 +61,12 @@ void Player::draw()
 
 bool Player::colides()
 {
-    auto points = stage.getPoints();
-    if (x - PLAYER_SIZE < points[0].x ||
-        x + PLAYER_SIZE > points[1].x ||
-        z + PLAYER_SIZE > points[1].z ||
-        z - PLAYER_SIZE < points[2].z)
+    auto xrange = stage.xrange;
+    auto zrange = stage.zrange;
+    if (x - PLAYER_SIZE < xrange.begin ||
+        x + PLAYER_SIZE > xrange.end   ||
+        z + PLAYER_SIZE > zrange.end   ||
+        z - PLAYER_SIZE < zrange.begin)
             return true;
 
     return false;

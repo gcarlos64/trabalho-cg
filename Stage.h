@@ -4,15 +4,13 @@
 #include <vector>
 #include "Point.h"
 #include "Player.h"
+#include "Range.h"
 
 class Stage {
     public:
-        Stage(std::vector<Point> points);
+        Stage(double xbegin, double xend, double zbegin, double zend);
         void draw();
-        std::vector<Point> getPoints();
-
-    private:
-        std::vector<Point> points;
+        Range xrange, zrange;
 };
 
 #endif
