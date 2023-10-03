@@ -28,6 +28,8 @@ void display()
         glutWireTeapot(50.0);
     glPopMatrix();
 
+    player.printScore();
+
     glutSwapBuffers();
 }
 

@@ -29,7 +29,7 @@ void Food::gen()
 void Food::draw()
 {
     glPushMatrix();
-        glTranslatef(pos.x, PLAYER_SIZE / 2 , pos.z);
+        glTranslatef(pos.x, PLAYER_SIZE, pos.z);
         glutSolidSphere(PLAYER_SIZE / 2, 20, 20);
     glPopMatrix();
 }

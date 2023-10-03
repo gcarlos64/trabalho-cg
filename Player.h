@@ -18,6 +18,7 @@ class Player {
         void commitCamera();
         void draw();
         void eat();
+        void printScore();
 
     private:
         unsigned int score;
