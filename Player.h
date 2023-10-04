@@ -5,7 +5,7 @@
 #include "Point.h"
 
 #define GROWTH_BY_FOOD 10
-#define PLAYER_SIZE 10.0
+#define PLAYER_SIZE 7.0
 #define PLAYER_SPEED 2.5
 #define VIEW_ANGLE 45
 #define VIEW_MAX 1500
