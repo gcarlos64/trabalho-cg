@@ -13,3 +13,9 @@ Utilize o script `build.sh` para compilar o jogo:
 ```
 $ ./build.sh
 ```
+
+## Rodando o jogo
+O processo de build irá gerar o arquivo `main`, apenas rode ele:
+```
+$ ./main
+```
