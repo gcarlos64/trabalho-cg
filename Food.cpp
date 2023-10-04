@@ -19,7 +19,7 @@ void Food::gen()
 {
     double r, theta;
     std::uniform_real_distribution<> dis(0.0, 1.0);
-    r = (stage.radius - PLAYER_SIZE) * sqrt(dis(seed));
+    r = (stage.radius - 3 * PLAYER_SIZE) * sqrt(dis(seed));
     theta = 2 * M_PI * dis(seed);
 
     pos.x = r * sin(theta);

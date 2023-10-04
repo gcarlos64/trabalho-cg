@@ -10,6 +10,7 @@ Player::Player()
     theta = 0;
     speed = PLAYER_SPEED;
     score = 0;
+    grow();
 }
 
 void Player::setTheta(double theta)
@@ -31,10 +32,18 @@ void Player::move()
         exit(0);
 
     if (eat())
-        for (int i = 0; i < GROWTH_BY_FOOD; i++)
-            body.push_front(pos); 
+        grow();
 
    body.pop_back();
+
+   bool mark = false;
+   for (auto p : body) {
+       if (!mark && pos.distance(p) >= 2 * PLAYER_SIZE)
+           mark = true;
+
+       if (mark && pos.distance(p) < 2 * PLAYER_SIZE)
+           exit(0);
+   }
 }
 
 void Player::commitCamera()
@@ -91,4 +100,10 @@ void Player::printScore()
                   pos.z + 1.5 * PLAYER_SIZE * cos(theta + M_PI_2));
     glutBitmapString(GLUT_BITMAP_9_BY_15, (unsigned char*)s.c_str());
     glEnable(GL_LIGHTING);
+}
+
+void Player::grow()
+{
+    for (int i = 0; i < GROWTH_BY_FOOD; i++)
+        body.push_front(pos); 
 }

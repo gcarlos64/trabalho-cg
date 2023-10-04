@@ -22,6 +22,7 @@ class Player {
         void draw();
         bool eat();
         void printScore();
+        void grow();
 
     private:
         unsigned int score;
