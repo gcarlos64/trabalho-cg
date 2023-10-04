@@ -21,14 +21,6 @@ Stage::Stage(double radius, unsigned int slices)
     controlPoints[1] = Point(radius * -sin(M_PI / 3), radius * -cos(M_PI / 3));
     controlPoints[2] = Point(radius * sin(M_PI / 3), radius * cos(M_PI / 3));
     controlPoints[3] = Point(0.0, radius);
-    /*
-    controlPoints = {
-        Point(0.0, -radius),
-        Point(radius * sin(-M_PI_4), radius * cos(-M_PI_4)),
-        Point(radius * sin(M_PI_4), radius * cos(M_PI_4)),
-        Point(0.0, radius),
-    };
-    */
 
     double t = 0.0;
     double dt = 1.0 / slices;
