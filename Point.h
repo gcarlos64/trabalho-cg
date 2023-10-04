@@ -5,6 +5,7 @@ class Point {
     public:
         Point();
         Point(double x, double z);
+        Point(const Point &p);
         Point(Point *controlPoints, double t);
         double distance(const Point &p);
         double x;

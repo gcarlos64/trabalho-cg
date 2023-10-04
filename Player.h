@@ -1,13 +1,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include <deque>
 #include "Point.h"
 
+#define GROWTH_BY_FOOD 10
+#define PLAYER_SIZE 10.0
+#define PLAYER_SPEED 2.5
+#define VIEW_ANGLE 45
 #define VIEW_MAX 1500
 #define VIEW_MIN 0.1
-#define VIEW_ANGLE 45
 #define VIEW_RANGE 400
-#define PLAYER_SIZE 10.0
 
 class Player {
     public:
@@ -17,13 +20,14 @@ class Player {
         void move();
         void commitCamera();
         void draw();
-        void eat();
+        bool eat();
         void printScore();
 
     private:
         unsigned int score;
         double theta, speed;
         Point pos;
+        std::deque<Point> body;
 };
 
 #endif

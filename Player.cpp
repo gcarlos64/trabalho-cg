@@ -8,7 +8,7 @@
 Player::Player()
 {
     theta = 0;
-    speed = 2.0;
+    speed = PLAYER_SPEED;
     score = 0;
 }
 
@@ -23,12 +23,18 @@ void Player::incTheta(double dtheta)
 }
 
 void Player::move()
-{
+{ 
+    body.push_front(pos); 
     pos.x += speed * sin(theta);
     pos.z += speed * cos(theta);
     if (stage.isIn(pos))
         exit(0);
-    eat();
+
+    if (eat())
+        for (int i = 0; i < GROWTH_BY_FOOD; i++)
+            body.push_front(pos); 
+
+   body.pop_back();
 }
 
 void Player::commitCamera()
@@ -54,17 +60,25 @@ void Player::draw()
 {
     glPushMatrix();
         glTranslatef(pos.x, PLAYER_SIZE, pos.z);
-        glutSolidSphere(PLAYER_SIZE, 20, 20);
+        glutSolidSphere(PLAYER_SIZE, 10, 10);
     glPopMatrix();
+
+    for (auto p : body) {
+        glPushMatrix();
+            glTranslatef(p.x, PLAYER_SIZE, p.z);
+            glutSolidSphere(PLAYER_SIZE, 10, 10);
+        glPopMatrix();
+    }
 }
 
-void Player::eat()
+bool Player::eat()
 {
     if (pos.distance(food.pos) < 3 * PLAYER_SIZE / 2) {
          score++;
-         speed += 0.1;
          food.gen();
+         return true;
      }
+     return false;
 }
 
 void Player::printScore()

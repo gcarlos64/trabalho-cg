@@ -7,6 +7,9 @@ Point::Point(double x, double z)
     this->z = z;
 }
 
+Point::Point(const Point &p):
+Point(p.x, p.z) {}
+
 Point::Point()
 {
     this->x = 0.0;

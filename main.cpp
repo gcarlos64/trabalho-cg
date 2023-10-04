@@ -5,7 +5,7 @@
 #include "Player.h"
 
 Player player;
-Stage stage(500.0, 100);
+Stage stage(250.0, 100);
 Food food;
 
 void display()
@@ -82,7 +82,7 @@ void gameLoop(int val)
 {
     player.move();
     glutPostRedisplay();
-    glutTimerFunc(16.6, gameLoop, 0);
+    glutTimerFunc(20.0, gameLoop, 0);
 }
 
 int main(int argc, char **argv)
