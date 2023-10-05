@@ -59,13 +59,13 @@ void Player::commitCamera()
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(VIEW_ANGLE, WIDTH/HEIGHT, VIEW_MIN, VIEW_MAX);
+    gluPerspective(VIEW_ANGLE, fAspect, VIEW_MIN, VIEW_MAX);
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     gluLookAt(cameraPos.x, VIEW_RANGE / 2, cameraPos.z,
-              cameraTarget.x, 0, cameraTarget.z,
+              cameraTarget.x, -VIEW_RANGE / 4, cameraTarget.z,
               0, 1, 0);
 }
 

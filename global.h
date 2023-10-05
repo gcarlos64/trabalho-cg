@@ -6,11 +6,12 @@
 #include "Player.h"
 #include "Stage.h"
 
-#define WIDTH 800
-#define HEIGHT 600
+#define INITIAL_WIDTH 800
+#define INITIAL_HEIGHT 600
 
 extern Player player;
 extern Stage stage;
 extern Food food;
+extern float fAspect;
 
 #endif

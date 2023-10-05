@@ -8,6 +8,14 @@ Player player;
 /* A stage centered on x=0.0, z=0.0 with radius=250.0 constructed from 100 points */
 Stage stage(250.0, 100);
 Food food;
+float fAspect = INITIAL_WIDTH / INITIAL_HEIGHT;
+
+void resize(GLint width, GLint height)
+{
+    height = (height == 0) ? 1 : height;
+    glViewport(0, 0, width, height);
+    fAspect = (GLfloat)width / (GLfloat)height;
+}
 
 void display()
 {
@@ -50,6 +58,8 @@ void special(int key, int x, int y)
 void init()
 {
     glClearColor(0.0, 0.2, 0.0, 0.0);
+
+    glViewport(0, 0, INITIAL_WIDTH, INITIAL_HEIGHT);
 
     /* Light settings */
     GLfloat ambientLight[4]  = { 0.2, 0.2, 0.2, 0.0 };
@@ -94,8 +104,9 @@ int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowSize(INITIAL_WIDTH, INITIAL_HEIGHT);
     glutCreateWindow("Snake3D");
+    glutReshapeFunc(resize);
     glutDisplayFunc(display);
     glutSpecialFunc(special);
     glutTimerFunc(50, gameLoop, 0);
