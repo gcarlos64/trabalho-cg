@@ -9,9 +9,9 @@ de bolinhas possíveis sem que a cabeça da cobra toque na borda
 ou em seu corpo.
 
 ## Build
-Utilize o script `build.sh` para compilar o jogo:
+Para compilar o jogo rode:
 ```
-$ ./build.sh
+$ make
 ```
 
 ## Rodando o jogo
