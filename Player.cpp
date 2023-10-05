@@ -103,7 +103,7 @@ void Player::printScore()
     std::string s("Score: ");
     s += std::to_string(score);
     glRasterPos3d(pos.x + 1.5 * PLAYER_SIZE * sin(theta + M_PI_2),
-                  0.6 * VIEW_RANGE,
+                  0.5 * VIEW_RANGE,
                   pos.z + 1.5 * PLAYER_SIZE * cos(theta + M_PI_2));
     glutBitmapString(GLUT_BITMAP_9_BY_15, (unsigned char*)s.c_str());
     glEnable(GL_LIGHTING);
