@@ -14,14 +14,18 @@ Stage::Stage(double radius, unsigned int slices)
 
     double theta = 0.0;
     double dtheta = 2 * M_PI / slices;
+
+    /* Generate border points */
     for (int i = 0; i <= slices; i++, theta += dtheta)
         border.push_back(Point(radius * sin(theta), radius * cos(theta)));
 
+    /* Set Bezier control points */
     controlPoints[0] = Point(0.0, -radius);
     controlPoints[1] = Point(radius * -sin(M_PI / 3), radius * -cos(M_PI / 3));
     controlPoints[2] = Point(radius * sin(M_PI / 3), radius * cos(M_PI / 3));
     controlPoints[3] = Point(0.0, radius);
 
+    /* Generate Bezier curve points */
     double t = 0.0;
     double dt = 1.0 / slices;
     for (int i = 0; i <= slices; i++, t += dt)
@@ -38,7 +42,7 @@ void Stage::draw(){
         }
     glEnd();
 
-    /* Division line */
+    /* Division line (Bezier curve) */
     glBegin(GL_LINE_STRIP);
         glLineWidth(10);
         glColor3f(0.0, 0.0, 0.0);

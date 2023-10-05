@@ -5,6 +5,7 @@
 #include "Player.h"
 
 Player player;
+/* A stage centered on x=0.0, z=0.0 with radius=250.0 constructed from 100 points */
 Stage stage(250.0, 100);
 Food food;
 
@@ -12,6 +13,7 @@ void display()
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    /* Update camera settings */
     player.commitCamera();
 
     glColor3f(0.1, 0.7, 0.2);
@@ -24,14 +26,15 @@ void display()
     food.draw();
 
     glColor3f(1.0, 0.2, 0.0);
-
     player.printScore();
 
     glutSwapBuffers();
 }
 
+/* Handles special input keys */
 void special(int key, int x, int y)
 {
+    /* Changes the direction of movement */
     switch (key) {
     case GLUT_KEY_LEFT:
         player.incTheta(0.1);
@@ -48,6 +51,7 @@ void init()
 {
     glClearColor(0.0, 0.2, 0.0, 0.0);
 
+    /* Light settings */
     GLfloat ambientLight[4]  = { 0.2, 0.2, 0.2, 0.0 };
     GLfloat difuseLight[4]   = { 1.0, 1.0, 1.0, 0.0 };
     GLfloat specularLight[4] = { 0.6, 0.6, 0.6, 0.0 };
@@ -55,6 +59,7 @@ void init()
 
     glShadeModel(GL_SMOOTH);
 
+    /* Material light properties */
     GLint materialShininess = 100;
     GLfloat materialSpecularity[4]  = { 0.5, 0.5, 0.7, 0.0 };
     GLfloat materialDifusebility[4] = { 0.5, 0.5, 0.5, 0.0 };

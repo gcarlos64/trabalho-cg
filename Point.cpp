@@ -16,7 +16,6 @@ Point::Point()
     this->z = 0.0;
 }
 
-/* Bezier */
 Point::Point(Point *controlPoints, double t)
 {
     double x, z;

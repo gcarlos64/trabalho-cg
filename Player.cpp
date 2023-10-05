@@ -13,11 +13,6 @@ Player::Player()
     grow();
 }
 
-void Player::setTheta(double theta)
-{
-    this->theta = theta;
-}
-
 void Player::incTheta(double dtheta)
 {
     theta += dtheta;
@@ -25,17 +20,26 @@ void Player::incTheta(double dtheta)
 
 void Player::move()
 { 
+    /* Store the old head position on the body */
     body.push_front(pos); 
+
     pos.x += speed * sin(theta);
     pos.z += speed * cos(theta);
+
+    /* Check for border colision */
     if (stage.isIn(pos))
         exit(0);
 
+    /* Try to eat some food */
     if (eat())
         grow();
 
    body.pop_back();
 
+   /*
+    * Disconsider the firsts points of the body, since they're always close
+    * to the head
+    */
    bool mark = false;
    for (auto p : body) {
        if (!mark && pos.distance(p) >= 2 * PLAYER_SIZE)
@@ -67,11 +71,13 @@ void Player::commitCamera()
 
 void Player::draw()
 {
+    /* Draw the head */
     glPushMatrix();
         glTranslatef(pos.x, PLAYER_SIZE, pos.z);
         glutSolidSphere(PLAYER_SIZE, 10, 10);
     glPopMatrix();
 
+    /* Draw the body */
     for (auto p : body) {
         glPushMatrix();
             glTranslatef(p.x, PLAYER_SIZE, p.z);
@@ -82,6 +88,7 @@ void Player::draw()
 
 bool Player::eat()
 {
+    /* The food has radius=PLAYER_SIZE/2 */
     if (pos.distance(food.pos) < 3 * PLAYER_SIZE / 2) {
          score++;
          food.gen();
